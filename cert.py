@@ -2,6 +2,7 @@ import ssl
 import datetime
 import time
 import socket
+import argparse
 from io import StringIO
 
 class Cert:
@@ -19,9 +20,9 @@ class Cert:
     def __str__(self):
         s = StringIO('')
 
-        s.write('Issuer:\n')
-        for x in self._issuer:
-            s.write(' {} : {}\n'.format(x,self._issuer[x]))
+        #s.write('Issuer:\n')
+        #for x in self._issuer:
+        #    s.write(' {} : {}\n'.format(x,self._issuer[x]))
 
         s.write('Subject:\n')
         for x in self._subject:
@@ -45,12 +46,19 @@ class Cert:
         s.write('Version : {}'.format(self._version))
         return s.getvalue()
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--hostname", help="Hostname where is the certificate")
+parser.add_argument("--port", help="",type=int)
+args = parser.parse_args()
+
+dict_vars = vars(args)
+
 context = ssl.create_default_context()
 conn = context.wrap_socket(socket.socket(socket.AF_INET),
-        server_hostname="*.dc.uba.ar")
+        server_hostname=dict_vars['hostname'])
 
 # Connect to host
-conn.connect(("www.dc.uba.ar",443))
+conn.connect((dict_vars['hostname'],dict_vars['port']))
 
 # Get certificate
 cert = conn.getpeercert()
