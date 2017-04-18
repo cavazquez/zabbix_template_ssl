@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-04-17T19:03:15Z</date>
+    <date>2017-04-18T15:54:56Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -120,7 +120,7 @@
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units>days</units>
                     <delta>0</delta>
@@ -161,9 +161,9 @@
                     <key>ssl.serial[{$HOSTNAME},{$PORT}]</key>
                     <delay>3600</delay>
                     <history>90</history>
-                    <trends>365</trends>
+                    <trends>0</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>4</value_type>
                     <allowed_hosts/>
                     <units/>
                     <delta>0</delta>
@@ -257,6 +257,38 @@
             <url/>
             <status>0</status>
             <priority>1</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{SSL check cert:ssl.notAfter[{$HOSTNAME},{$PORT}].last()}&lt;15</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Remaining 15 days</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{SSL check cert:ssl.notAfter[{$HOSTNAME},{$PORT}].last()}&lt;30</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Remaining 30 days</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
